@@ -1,0 +1,14 @@
+{
+  "name": "node_client",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "author": {
+    "email": "rishi.cp01@gmail.com",
+    "name": "Kaushik Rishi Manchukonda"
+  },
+  "dependencies": {
+    "farmhash": "^3.2.1",
+    "socket.io-client": "^4.1.2"
+  }
+}
