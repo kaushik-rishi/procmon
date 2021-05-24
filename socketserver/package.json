@@ -1,0 +1,18 @@
+{
+  "name": "socket_server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "author": {
+    "email": "rishi.cp01@gmail.com",
+    "name": "Kaushik Rishi Manchukonda"
+  },
+  "dependencies": {
+    "farmhash": "^3.2.1",
+    "socket.io": "^4.1.2",
+    "socket.io-redis": "^6.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
