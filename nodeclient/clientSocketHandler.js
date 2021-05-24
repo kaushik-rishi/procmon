@@ -15,11 +15,17 @@ socket.on("connect", () => {
     // send the performance data for every 1 second
     let performanceDataInterval = setInterval(() => {
         getPerformanceData().then((perfData) => {
+            // [ ] DEBUG_LOGS: incrementabl building of event listeners on disconnect and reconnect
+            // console.log("alive");
+            // console.log(socket.disconnected);
             socket.emit("perf_data", perfData);
         });
     }, 1000);
-});
 
-socket.on("disconnect", () => {
-    console.log("Node client lost connection with the server :-(");
+    socket.on("disconnect", () => {
+        // Clear the interval if the socket is disconnected
+        // [+] BUGFIX: prevents incremental build up of event listeners
+        clearInterval(performanceDataInterval);
+        console.log("Node client lost connection with the server.");
+    });
 });

@@ -42,12 +42,25 @@ if (cluster.isMaster) {
 
     const server = net.createServer({ pauseOnConnect: true }, (connection) => {
         let worker =
-            // workers[worker_index(connection.remoteAddress, num_processes)];
             workers[worker_index(connection.remoteAddress, num_processes)];
         worker.send("sticky-session:connection", connection);
     });
-    server.listen(port);
-    console.log(`Master Node 🦸 up @ http://localhost:${port}`);
+
+    server.listen(port, () => {
+        console.log(`🦸 Master TCP Server started @ ${port}`);
+    });
+    server.on("error", (err) => {
+        if (err.code === "EADDRINUSE") {
+            console.log(
+                `👎️ The address/port is busy. Close any applications running on the port ${port}`
+            );
+            console.log("Retrying ...");
+            setTimeout(() => {
+                server.close();
+                server.listen(port);
+            }, 3000);
+        }
+    });
 } else {
     let app = express();
 
