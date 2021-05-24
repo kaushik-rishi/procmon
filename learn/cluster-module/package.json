@@ -1,0 +1,15 @@
+{
+  "name": "cluster-module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "loadtest10k": "loadtest -n 100000 -c 1000 http://localhost:8080"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "loadtest": "^5.1.2"
+  }
+}
