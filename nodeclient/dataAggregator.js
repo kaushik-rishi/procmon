@@ -21,20 +21,9 @@
 */
 
 const os = require("os");
-const io = require("socket.io-client");
-const { port } = require("../config.json");
-const socket = io(`http://127.0.0.1:${port}`);
-
-socket.on("connect", () => {
-    console.log(`Node client connected to the socket server ! ${socket.id}`);
-});
-
-socket.on("disconnect", () => {
-    console.log("Node client lost connection with the server :-(");
-});
 
 // async function that returns the performanceData
-const performanceData = () => {
+const getPerformanceData = () => {
     return new Promise(async (resolve, reject) => {
         const totalMem = os.totalmem(); // bytes
         const freeMem = os.freemem(); // bytes
@@ -88,4 +77,22 @@ const getCpuLoad = () => {
     });
 };
 
+const getExternalMACAddress = () => {
+    let macAddress;
+    const networkInterfaces = os.networkInterfaces();
+
+    for (let nI in networkInterfaces) {
+        let nIdata = networkInterfaces[nI];
+        // if it is not an internal network interface
+        if (!nIdata[0].internal) {
+            macAddress = nIdata[0].mac;
+        }
+    }
+    return macAddress;
+};
+
 // performanceData().then(console.log);
+module.exports = {
+    getPerformanceData,
+    getExternalMACAddress,
+};

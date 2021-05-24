@@ -1,3 +1,5 @@
 {
-    "port": 8181
+    "port": 8181,
+    "uiClientAuthSecret": "sample_ui_secret",
+    "machineClientAuthSecret": "sample_nodeclient_secret"
 }
