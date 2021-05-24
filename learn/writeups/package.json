@@ -1,0 +1,12 @@
+{
+  "name": "writeups",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "farmhash": "^3.2.1",
+    "socket.io": "^4.1.2",
+    "socket.io-redis": "^6.1.1"
+  }
+}
