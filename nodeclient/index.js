@@ -21,6 +21,17 @@
 */
 
 const os = require("os");
+const io = require("socket.io-client");
+const { port } = require("../config.json");
+const socket = io(`http://127.0.0.1:${port}`);
+
+socket.on("connect", () => {
+    console.log(`Node client connected to the socket server ! ${socket.id}`);
+});
+
+socket.on("disconnect", () => {
+    console.log("Node client lost connection with the server :-(");
+});
 
 // async function that returns the performanceData
 const performanceData = () => {
