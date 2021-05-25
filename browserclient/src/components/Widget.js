@@ -4,6 +4,7 @@ import Mem from "./Mem";
 import Info from "./Info";
 
 const Widget = ({ data }) => {
+    // console.log(data);
     // prettier-ignore
     const { cores, cpuLoad, cpuModel, cpuSpeed, freeMem, memUsage, osType, totalMem, uptime, usedMem } = data;
     return (

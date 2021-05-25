@@ -4,18 +4,48 @@ import socket from "./utilities/socketConnection";
 import Widget from "./components/Widget";
 
 const App = () => {
-    const [performanceData, setPerformanceData] = useState({});
+    const [performanceDatas, setPerformanceDatas] = useState({});
+    /*
+    peformanceDatas = {
+        '1': {
+            cpuLoad: ...
+        },
+        '2': {
+            cpuLoad: ...
+        }
+    }
+    */
     useEffect(() => {
         socket.on("perf_data", (data) => {
+            // console.log(data.macAddress);
             // console.log(data.cpuLoad);
-            setPerformanceData(data);
+            const newData = {};
+            newData[data.macAddress] = data;
+            setPerformanceDatas((prevPerfDatas) => {
+                return { ...prevPerfDatas, ...newData };
+                /*
+                 * BUG1: Not working
+                 * const newPerfDatas = prevPerfDatas;
+                 * newPerfDatas[data.macAddress] = data;
+                 * return newPerfDatas;
+                 */
+                /*
+                 * BUG2: Not working
+                 * prevPerfDatas[data.macAddress] = data;
+                 * console.log(prevPerfDatas);
+                 * return prevPerfDatas;
+                 */
+            });
         });
     }, []);
-    return (
-        <div>
-            <Widget data={performanceData} />
-        </div>
-    );
+
+    let widgetList = [];
+    Object.entries(performanceDatas).forEach(([macAddress, perfData]) => {
+        widgetList.push(<Widget key={macAddress} data={perfData} />);
+    });
+
+    widgetList = [];
+    return <div>{widgetList}</div>;
 };
 
 export default App;

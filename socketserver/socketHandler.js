@@ -59,16 +59,17 @@ module.exports = (io, socket) => {
      * will be rendered corresponding to the machine
      */
 
-    socket.on("perf_data", (perfData) => {
-        // emitting the performance data only to the browsers
-        console.log("Tick ...");
-        io.to("browsers").emit("perf_data", perfData);
-    });
-
     socket.on("init_perf_data", async (initalData) => {
         macAddress = initalData.macAddress;
         console.log(await addIfNewDevice(macAddress));
 
         console.log(`New connection ${macAddress}`);
+    });
+
+    socket.on("perf_data", (perfData) => {
+        // emitting the performance data only to the browsers
+        console.log("Tick ...");
+        perfData.macAddress = macAddress;
+        io.to("browsers").emit("perf_data", perfData);
     });
 };
