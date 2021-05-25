@@ -1,8 +1,34 @@
 // when this function is exported, all the code in the file is run
 // so we can safely connect to the DB here at the top
 require("./dbConnector")();
+const Machine = require("./models/Machine");
+
+const addIfNewDevice = async (macAddress) => {
+    let machine = await Machine.findOne({
+        macAddress,
+    });
+
+    if (machine !== null) {
+        // already connected
+        return;
+    } else {
+        // add to DB
+        try {
+            let newMachine = await Machine.create({
+                macAddress,
+            });
+            console.log(newMachine);
+        } catch (err) {
+            console.log(
+                `Error encountered while adding new machine to the DB\nMAC Address: ${macAddress}\nReason: ${err.message}`
+            );
+        }
+    }
+};
 
 module.exports = (io, socket) => {
+    let macAddress;
+
     // io - socket.io server
     // socket - socket corresponding to the particular connection
 
@@ -28,5 +54,12 @@ module.exports = (io, socket) => {
 
     socket.on("perf_data", (perfData) => {
         console.log(perfData);
+    });
+
+    socket.on("init_perf_data", (initalData) => {
+        macAddress = initalData.macAddress;
+        addIfNewDevice(macAddress);
+
+        console.log(`New connection ${macAddress}`);
     });
 };

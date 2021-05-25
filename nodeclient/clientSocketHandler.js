@@ -12,6 +12,12 @@ socket.on("connect", () => {
     // simple authorisation
     socket.emit("authSecret", machineClientAuthSecret);
 
+    // send init data
+    getPerformanceData().then((perfData) => {
+        perfData.macAddress = macAddress;
+        socket.emit("init_perf_data", perfData);
+    });
+
     // send the performance data for every 1 second
     let performanceDataInterval = setInterval(() => {
         getPerformanceData().then((perfData) => {

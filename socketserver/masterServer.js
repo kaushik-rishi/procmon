@@ -11,7 +11,9 @@ const cluster = require("cluster");
 const net = require("net");
 const socketio = require("socket.io");
 const socketHandler = require("./socketHandler");
-require("dotenv").config();
+require("dotenv").config({
+    path: `${__dirname}/.env`,
+});
 
 const { port } = require("../config.json");
 // const port = 8181;
@@ -64,25 +66,19 @@ if (cluster.isMaster) {
     });
 } else {
     let app = express();
-
     const server = app.listen(0, "localhost");
     console.log(`🚀 Worker up ${process.pid}`);
     const io = socketio(server);
-
     io.adapter(io_redis({ host: "localhost", port: 6379 }));
-
     io.on("connection", function (socket) {
         socketHandler(io, socket);
         console.log(`connected to worker: ${cluster.worker.id}`); // 💜 of the program. This is why we have used the redis-adapter and all
     });
-
     process.on("message", function (message, connection) {
         if (message !== "sticky-session:connection") {
             return;
         }
-
         server.emit("connection", connection);
-
         connection.resume();
     });
 }
