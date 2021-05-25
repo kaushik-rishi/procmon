@@ -3,6 +3,10 @@
 require("./dbConnector")();
 const Machine = require("./models/Machine");
 
+/*
+ * see alternateImplementation.js for promise based
+ * implementation of this function
+ */
 const addIfNewDevice = async (macAddress) => {
     let machine = await Machine.findOne({
         macAddress,
@@ -10,18 +14,20 @@ const addIfNewDevice = async (macAddress) => {
 
     if (machine !== null) {
         // already connected
-        return;
+        return "found";
     } else {
         // add to DB
         try {
             let newMachine = await Machine.create({
                 macAddress,
             });
-            console.log(newMachine);
+            return "created";
         } catch (err) {
             console.log(
                 `Error encountered while adding new machine to the DB\nMAC Address: ${macAddress}\nReason: ${err.message}`
             );
+            throw err;
+            return err;
         }
     }
 };
@@ -53,12 +59,12 @@ module.exports = (io, socket) => {
      */
 
     socket.on("perf_data", (perfData) => {
-        console.log(perfData);
+        // console.log(perfData);
     });
 
-    socket.on("init_perf_data", (initalData) => {
+    socket.on("init_perf_data", async (initalData) => {
         macAddress = initalData.macAddress;
-        addIfNewDevice(macAddress);
+        console.log(await addIfNewDevice(macAddress));
 
         console.log(`New connection ${macAddress}`);
     });
