@@ -88,7 +88,11 @@ const getExternalMACAddress = () => {
             macAddress = nIdata[0].mac;
         }
     }
-    return macAddress;
+    // return macAddress;
+
+    const randomMacAddress = Math.random().toString(36).substring(7);
+    console.log(randomMacAddress);
+    return randomMacAddress;
 };
 
 // performanceData().then(console.log);

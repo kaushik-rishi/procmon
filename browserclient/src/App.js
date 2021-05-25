@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import socket from "./utilities/socketConnection";
-
+import { Container } from "react-bootstrap";
 import Widget from "./components/Widget";
 
 const App = () => {
     const [performanceDatas, setPerformanceDatas] = useState({});
     /*
+    - a dictionary that maps the mac addresses to the data
     peformanceDatas = {
         '1': {
             cpuLoad: ...
@@ -44,8 +45,7 @@ const App = () => {
         widgetList.push(<Widget key={macAddress} data={perfData} />);
     });
 
-    widgetList = [];
-    return <div>{widgetList}</div>;
+    return <Container>{widgetList}</Container>;
 };
 
 export default App;

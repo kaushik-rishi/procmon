@@ -1,8 +1,8 @@
-@import "./stylesheets/app.css";
-@import "./stylesheets/widget.css";
-@import "./stylesheets/cpu.css";
-@import "./stylesheets/info.css";
-@import "./stylesheets/mem.css";
+/* @import "./stylesheets/app.css"; */
+/* @import "./stylesheets/widget.css"; */
+/* @import "./stylesheets/cpu.css"; */
+/* @import "./stylesheets/info.css"; */
+/* @import "./stylesheets/mem.css"; */
 
 body {
   margin: 0;
@@ -11,4 +11,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+*::selection {
+  color: black;
+  background: pink;
 }
