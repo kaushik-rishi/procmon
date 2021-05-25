@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import socket from "./utilities/socketConnection";
 
+import Widget from "./components/Widget";
+
 const App = () => {
     const [performanceData, setPerformanceData] = useState({});
     useEffect(() => {
@@ -11,7 +13,7 @@ const App = () => {
     }, []);
     return (
         <div>
-            <code>{JSON.stringify(performanceData, null, 4)}</code>
+            <Widget data={performanceData} />
         </div>
     );
 };
