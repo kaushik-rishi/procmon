@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 
 const Info = ({ info }) => {
     // console.log(info);
@@ -10,8 +11,8 @@ const Info = ({ info }) => {
             <h5>Operating System</h5>
             <p>{osType}</p>
             <div className='border-top my-3'></div>
-            <h5>Uptime</h5>
-            <p>{uptime}</p>
+            <h5>Time online</h5>
+            <p>{moment.duration(uptime).humanize()}</p>
             <div className='border-top my-3'></div>
             <h5>CPU Information</h5>
             <p>
