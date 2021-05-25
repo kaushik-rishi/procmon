@@ -8,6 +8,7 @@
 
 const express = require("express");
 const cluster = require("cluster");
+const cors = require("cors");
 const net = require("net");
 const socketio = require("socket.io");
 const socketHandler = require("./socketHandler");
@@ -68,7 +69,15 @@ if (cluster.isMaster) {
     let app = express();
     const server = app.listen(0, "localhost");
     console.log(`🚀 Worker up ${process.pid}`);
-    const io = socketio(server);
+
+    app.use(cors());
+
+    const io = socketio(server, {
+        // Refer fixes.md ⭐️ Socket.io cors error
+        cors: {
+            origin: "http://localhost:3000",
+        },
+    });
     io.adapter(io_redis({ host: "localhost", port: 6379 }));
     io.on("connection", function (socket) {
         socketHandler(io, socket);

@@ -44,7 +44,7 @@ module.exports = (io, socket) => {
         if (secret === "sample_nodeclient_secret") {
             socket.join("machines");
         } else if (secret === "sample_ui_secret") {
-            socket.join("browser");
+            socket.join("browsers");
         } else {
             // invalid key
             console.log("❌ Connection closed : Bad Auth");
@@ -60,7 +60,9 @@ module.exports = (io, socket) => {
      */
 
     socket.on("perf_data", (perfData) => {
-        console.log(perfData);
+        // emitting the performance data only to the browsers
+        console.log("Tick ...");
+        io.to("browsers").emit("perf_data", perfData);
     });
 
     socket.on("init_perf_data", async (initalData) => {

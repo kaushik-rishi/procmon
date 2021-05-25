@@ -1,6 +1,7 @@
 import io from "socket.io-client";
-const { port, uiClientAuthSecret } = require("../../../config.json");
-const socket = io.connect(`http://localhost:${port}`);
+const port = 8181;
+const uiClientAuthSecret = "sample_ui_secret";
+const socket = io(`http://localhost:${port}`);
 
 socket.emit("authSecret", uiClientAuthSecret);
 
