@@ -38,7 +38,7 @@ module.exports = (io, socket) => {
     // io - socket.io server
     // socket - socket corresponding to the particular connection
 
-    console.log(`Connected ${socket.id}`);
+    console.log(`🦴 Socket ID :  ${socket.id}`);
 
     socket.on("authSecret", (secret) => {
         if (secret === "sample_nodeclient_secret") {
@@ -47,6 +47,7 @@ module.exports = (io, socket) => {
             socket.join("browser");
         } else {
             // invalid key
+            console.log("❌ Connection closed : Bad Auth");
             socket.disconnect(true);
         }
     });
@@ -59,7 +60,7 @@ module.exports = (io, socket) => {
      */
 
     socket.on("perf_data", (perfData) => {
-        // console.log(perfData);
+        console.log(perfData);
     });
 
     socket.on("init_perf_data", async (initalData) => {

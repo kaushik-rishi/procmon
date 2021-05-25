@@ -72,7 +72,7 @@ if (cluster.isMaster) {
     io.adapter(io_redis({ host: "localhost", port: 6379 }));
     io.on("connection", function (socket) {
         socketHandler(io, socket);
-        console.log(`connected to worker: ${cluster.worker.id}`); // 💜 of the program. This is why we have used the redis-adapter and all
+        console.log(`Connected to worker: ${cluster.worker.id}`); // 💜 of the program. This is why we have used the redis-adapter and all
     });
     process.on("message", function (message, connection) {
         if (message !== "sticky-session:connection") {
