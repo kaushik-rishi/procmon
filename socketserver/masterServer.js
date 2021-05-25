@@ -11,6 +11,7 @@ const cluster = require("cluster");
 const net = require("net");
 const socketio = require("socket.io");
 const socketHandler = require("./socketHandler");
+require("dotenv").config();
 
 const { port } = require("../config.json");
 // const port = 8181;
