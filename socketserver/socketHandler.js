@@ -7,7 +7,10 @@ const Machine = require("./models/Machine");
  * see alternateImplementation.js for promise based
  * implementation of this function
  */
-const addIfNewDevice = async (macAddress) => {
+const addIfNewDevice = async (perfData) => {
+    // prettier-ignore
+    const { macAddress, freeMem, totalMem, usedMem, memUsage, osType, uptime, cores, cpuModel, cpuSpeed, cpuLoad,
+    } = perfData;
     let machine = await Machine.findOne({
         macAddress,
     });
@@ -18,9 +21,11 @@ const addIfNewDevice = async (macAddress) => {
     } else {
         // add to DB
         try {
-            let newMachine = await Machine.create({
-                macAddress,
-            });
+            // prettier-ignore
+            const machineData = { macAddress, freeMem, totalMem, usedMem, memUsage, osType, uptime, cores, cpuModel, cpuSpeed, cpuLoad,
+            };
+            console.log(machineData);
+            let newMachine = await Machine.create(machineData);
             return "created";
         } catch (err) {
             console.log(
@@ -61,7 +66,7 @@ module.exports = (io, socket) => {
 
     socket.on("init_perf_data", async (initalData) => {
         macAddress = initalData.macAddress;
-        console.log(await addIfNewDevice(macAddress));
+        console.log(await addIfNewDevice(initalData));
 
         console.log(`New connection ${macAddress}`);
     });

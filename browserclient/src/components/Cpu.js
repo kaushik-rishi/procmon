@@ -1,10 +1,12 @@
 import React from "react";
 import drawCircle from "../scripts/canvasLoadAnimation";
 
-const Cpu = ({ info: cpuLoad }) => {
+const Cpu = ({ info: cpuLoad, macAddress }) => {
     // console.log(cpuLoad);
 
-    const canvas = document.querySelector("canvas");
+    const canvas = document.querySelector(`.canvas-cpu-${macAddress}`);
+    const classname = `canvas-cpu-${macAddress}`;
+
     drawCircle(canvas, cpuLoad);
     return (
         <div className='d-flex flex-column justify-content-center align-items-center m-4 p-2'>
@@ -15,10 +17,7 @@ const Cpu = ({ info: cpuLoad }) => {
                     height: "200px",
                     position: "relative",
                 }}>
-                <canvas
-                    className='canvas-cpu'
-                    width='200'
-                    height='200'></canvas>
+                <canvas width='200' height='200' className={classname}></canvas>
                 <div
                     style={{
                         position: "absolute",

@@ -5,14 +5,14 @@ import Info from "./Info";
 import { Row, Col, Card } from "react-bootstrap";
 
 const Widget = ({ data }) => {
-    console.log(data.macAddress);
+    // console.log(data.macAddress);
     // prettier-ignore
     const { cores, cpuLoad, cpuModel, cpuSpeed, freeMem, memUsage, osType, totalMem, uptime, usedMem } = data;
     return (
-        <Card className='m-5 py-3 rounded'>
+        <Card className='m-5 p-3 rounded'>
             <Row>
                 <Col>
-                    <Cpu info={cpuLoad} />
+                    <Cpu info={cpuLoad} macAddress={data.macAddress} />
                 </Col>
                 <Col>
                     <Mem
@@ -22,6 +22,7 @@ const Widget = ({ data }) => {
                             usedMem,
                             memUsage,
                         }}
+                        macAddress={data.macAddress}
                     />
                 </Col>
                 <Col>

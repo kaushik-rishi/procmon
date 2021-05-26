@@ -1,15 +1,15 @@
 import React from "react";
 import drawCircle from "../scripts/canvasLoadAnimation";
 
-const Mem = ({ info }) => {
+const Mem = ({ info, macAddress }) => {
     // console.log(info);
     let { freeMem, totalMem, usedMem, memUsage } = info;
     memUsage *= 100;
     const factor = 1024 * 1024 * 1024;
 
     // console.log(cpuLoad);
-
-    const canvas = document.querySelector("canvas.mem");
+    const classname = `canvas-mem-${macAddress}`;
+    const canvas = document.querySelector(`.canvas-mem-${macAddress}`);
     drawCircle(canvas, memUsage);
     return (
         <div className='d-flex flex-column justify-content-center align-items-center m-4 p-2'>
@@ -21,9 +21,9 @@ const Mem = ({ info }) => {
                     position: "relative",
                 }}>
                 <canvas
-                    className='canvas-cpu mem'
                     width='200px'
-                    height='200px'></canvas>
+                    height='200px'
+                    className={classname}></canvas>
                 <div
                     style={{
                         position: "absolute",
