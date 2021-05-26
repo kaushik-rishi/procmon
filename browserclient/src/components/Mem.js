@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import drawCircle from "../scripts/canvasLoadAnimation";
 
-const Mem = ({ info, macAddress, classname }) => {
+const Mem = ({ info, macAddress, memWidgetId }) => {
     // console.log(info);
     let { freeMem, totalMem, usedMem, memUsage } = info;
     memUsage *= 100;
@@ -9,8 +9,14 @@ const Mem = ({ info, macAddress, classname }) => {
 
     // console.log(cpuLoad);
     // const classname = `canvas-mem-${macAddress}`;
-    const canvas = document.querySelector(`.canvas-mem-${macAddress}`);
+    useEffect(() => {
+        const canvas = document.querySelector(`#${memWidgetId}`);
+        drawCircle(canvas, memUsage);
+    }, []);
+
+    const canvas = document.querySelector(`#${memWidgetId}`);
     drawCircle(canvas, memUsage);
+
     return (
         <div className='d-flex flex-column justify-content-center align-items-center m-4 p-2'>
             <h3>Memory Usage</h3>
@@ -20,10 +26,7 @@ const Mem = ({ info, macAddress, classname }) => {
                     height: "200px",
                     position: "relative",
                 }}>
-                <canvas
-                    width='200px'
-                    height='200px'
-                    className={classname}></canvas>
+                <canvas width='200px' height='200px' id={memWidgetId}></canvas>
                 <div
                     style={{
                         position: "absolute",

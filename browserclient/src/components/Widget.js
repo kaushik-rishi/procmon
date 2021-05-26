@@ -10,6 +10,7 @@ const Widget = ({ data }) => {
     // console.log(data.isActive);
     // prettier-ignore
     const { cores, cpuLoad, cpuModel, cpuSpeed, freeMem, memUsage, osType, totalMem, uptime, usedMem, macAddress, isActive } = data;
+    console.log(isActive);
     return (
         <Card
             className='m-5 p-3 rounded position-relative'
@@ -20,7 +21,7 @@ const Widget = ({ data }) => {
                     <Cpu
                         info={cpuLoad}
                         macAddress={macAddress}
-                        classname={`canvas-cpu-${macAddress}`}
+                        cpuWidgetId={`canvas-cpu-${macAddress}`}
                     />
                 </Col>
                 <Col>
@@ -32,7 +33,7 @@ const Widget = ({ data }) => {
                             memUsage,
                         }}
                         macAddress={macAddress}
-                        classname={`canvas-mem-${macAddress}`}
+                        memWidgetId={`canvas-mem-${macAddress}`}
                     />
                 </Col>
                 <Col>

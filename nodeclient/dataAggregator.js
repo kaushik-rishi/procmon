@@ -86,6 +86,7 @@ const getExternalMACAddress = () => {
     randomMacAddress = Math.random().toString(36).substring(7);
     randomMacAddress = Number(Math.random() > 0.5).toString(); // either 1 or 0
     randomMacAddress = Math.floor(Math.random() * 3) + 1; // 0, 1, 2
+    // randomMacAddress = 1;
 
     console.log(`Random generated MAC: ${randomMacAddress}`);
     return randomMacAddress;

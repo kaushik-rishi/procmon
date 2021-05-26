@@ -91,4 +91,15 @@ module.exports = (io, socket) => {
         perfData.macAddress = macAddress;
         io.to("browsers").emit("perf_data", perfData);
     });
+
+    // send an emit for showing that the device is now offline
+    socket.on("disconnect", () => {
+        console.log("Send inactive emit to browsers");
+        Machine.findOne({ macAddress }, (err, machine) => {
+            if (!machine) return;
+            machine.isActive = false;
+            console.log(machine);
+            io.to("browsers").emit(machine);
+        });
+    });
 };
