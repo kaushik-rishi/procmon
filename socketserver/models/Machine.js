@@ -16,6 +16,7 @@ const MachineSchema = new mongoose.Schema({
     cpuModel: String,
     cpuSpeed: Number,
     cpuLoad: Number,
+    isActive: { type: Boolean, default: false },
 });
 
 const Machine = mongoose.model("Machine", MachineSchema);

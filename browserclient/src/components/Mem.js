@@ -1,14 +1,14 @@
 import React from "react";
 import drawCircle from "../scripts/canvasLoadAnimation";
 
-const Mem = ({ info, macAddress }) => {
+const Mem = ({ info, macAddress, classname }) => {
     // console.log(info);
     let { freeMem, totalMem, usedMem, memUsage } = info;
     memUsage *= 100;
     const factor = 1024 * 1024 * 1024;
 
     // console.log(cpuLoad);
-    const classname = `canvas-mem-${macAddress}`;
+    // const classname = `canvas-mem-${macAddress}`;
     const canvas = document.querySelector(`.canvas-mem-${macAddress}`);
     drawCircle(canvas, memUsage);
     return (

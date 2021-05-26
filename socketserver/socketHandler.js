@@ -53,6 +53,7 @@ module.exports = (io, socket) => {
             Machine.find((err, machines) => {
                 // getting all the pre-existing machines
                 machines.forEach((machine) => {
+                    // on load all machines are offline
                     machine.isActive = false;
                     socket.emit("perf_data", machine);
                 });

@@ -18,6 +18,7 @@ const App = () => {
     */
     useEffect(() => {
         socket.on("perf_data", (data) => {
+            // console.log(data);
             // console.log(data.macAddress);
             // console.log(data.cpuLoad);
             const newData = {};

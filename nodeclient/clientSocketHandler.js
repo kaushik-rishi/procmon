@@ -21,9 +21,11 @@ socket.on("connect", () => {
     // send the performance data for every 1 second
     let performanceDataInterval = setInterval(() => {
         getPerformanceData().then((perfData) => {
-            // [ ] DEBUG_LOGS: incrementabl building of event listeners on disconnect and reconnect
+            // [+] DEBUG_LOGS: incrementabl building of event listeners on disconnect and reconnect
             // console.log("alive");
             // console.log(socket.disconnected);
+            perfData.macAddress = macAddress;
+            perfData.isActive = true;
             socket.emit("perf_data", perfData);
         });
     }, 1000);

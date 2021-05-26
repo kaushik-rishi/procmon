@@ -1,15 +1,11 @@
 import React from "react";
 import drawCircle from "../scripts/canvasLoadAnimation";
 
-const Cpu = ({ info: cpuLoad, macAddress }) => {
+const Cpu = ({ info: cpuLoad, macAddress, classname }) => {
     // console.log(cpuLoad);
-    console.log(`render ${macAddress}`);
 
-    const classname = `canvas-cpu-${macAddress}`;
+    // const classname = `canvas-cpu-${macAddress}`;
     const canvas = document.querySelector(`.${classname}`);
-    console.log(canvas);
-
-    console.log(`drawing ${macAddress} ${cpuLoad}`);
     drawCircle(canvas, cpuLoad);
 
     return (
