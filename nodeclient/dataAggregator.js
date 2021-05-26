@@ -81,6 +81,15 @@ const getExternalMACAddress = () => {
     let macAddress;
     const networkInterfaces = os.networkInterfaces();
 
+    // [+] Remove this later [TESTING PURPOSES ONLY !!]
+    let randomMacAddress;
+    randomMacAddress = Math.random().toString(36).substring(7);
+    randomMacAddress = Number(Math.random() > 0.5).toString(); // either 1 or 0
+    randomMacAddress = Math.floor(Math.random() * 3) + 1; // 0, 1, 2
+
+    console.log(`Random generated MAC: ${randomMacAddress}`);
+    return randomMacAddress;
+
     for (let nI in networkInterfaces) {
         let nIdata = networkInterfaces[nI];
         // if it is not an internal network interface
@@ -88,11 +97,7 @@ const getExternalMACAddress = () => {
             macAddress = nIdata[0].mac;
         }
     }
-    // return macAddress;
-
-    const randomMacAddress = Math.random().toString(36).substring(7);
-    console.log(randomMacAddress);
-    return randomMacAddress;
+    return macAddress;
 };
 
 // performanceData().then(console.log);
