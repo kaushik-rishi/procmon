@@ -3,11 +3,15 @@ import drawCircle from "../scripts/canvasLoadAnimation";
 
 const Cpu = ({ info: cpuLoad, macAddress }) => {
     // console.log(cpuLoad);
+    console.log(`render ${macAddress}`);
 
-    const canvas = document.querySelector(`.canvas-cpu-${macAddress}`);
     const classname = `canvas-cpu-${macAddress}`;
+    const canvas = document.querySelector(`.${classname}`);
+    console.log(canvas);
 
+    console.log(`drawing ${macAddress} ${cpuLoad}`);
     drawCircle(canvas, cpuLoad);
+
     return (
         <div className='d-flex flex-column justify-content-center align-items-center m-4 p-2'>
             <h3>CPU Load</h3>

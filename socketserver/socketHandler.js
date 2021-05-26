@@ -45,11 +45,24 @@ module.exports = (io, socket) => {
 
     console.log(`🦴 Socket ID :  ${socket.id}`);
 
-    socket.on("authSecret", (secret) => {
+    socket.on("authSecret", async (secret) => {
         if (secret === "sample_nodeclient_secret") {
             socket.join("machines");
         } else if (secret === "sample_ui_secret") {
             socket.join("browsers");
+            Machine.find((err, machines) => {
+                // getting all the pre-existing machines
+                machines.forEach((machine) => {
+                    machine.isActive = false;
+                    socket.emit("perf_data", machine);
+                });
+
+                if (err) {
+                    // prettier-ignore
+                    console.log("Failed to fetch all pre-existing devices from the database");
+                    console.log(err.message);
+                }
+            });
         } else {
             // invalid key
             console.log("❌ Connection closed : Bad Auth");
