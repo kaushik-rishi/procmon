@@ -24,6 +24,7 @@ yarn-error.log*
 
 # private files
 *.private
+*.private.*
 
 # Redis database persistent file
 dump.rdb
