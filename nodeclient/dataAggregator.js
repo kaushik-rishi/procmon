@@ -89,7 +89,7 @@ const getExternalMACAddress = () => {
     // randomMacAddress = 1;
 
     console.log(`Random generated MAC: ${randomMacAddress}`);
-    return randomMacAddress;
+    // return randomMacAddress;
 
     for (let nI in networkInterfaces) {
         let nIdata = networkInterfaces[nI];
