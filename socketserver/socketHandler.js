@@ -99,7 +99,7 @@ module.exports = (io, socket) => {
             if (!machine) return;
             machine.isActive = false;
             console.log(machine);
-            io.to("browsers").emit(machine);
+            io.to("browsers").emit("perf_data", machine);
         });
     });
 };
