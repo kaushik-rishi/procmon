@@ -30,8 +30,6 @@ const App = () => {
                  * const newPerfDatas = prevPerfDatas;
                  * newPerfDatas[data.macAddress] = data;
                  * return newPerfDatas;
-                 */
-                /*
                  * BUG2: Not working
                  * prevPerfDatas[data.macAddress] = data;
                  * console.log(prevPerfDatas);
