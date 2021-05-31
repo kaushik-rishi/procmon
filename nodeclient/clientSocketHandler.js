@@ -1,6 +1,10 @@
 const io = require("socket.io-client");
-const { port, machineClientAuthSecret } = require("../config.json");
-const socket = io(`http://localhost:${port}`);
+const {
+    port: portServer,
+    machineClientAuthSecret,
+    privateIpServer,
+} = require("../config.json");
+const socket = io(`http://${privateIpServer}:${portServer}`);
 const {
     getPerformanceData,
     getExternalMACAddress,

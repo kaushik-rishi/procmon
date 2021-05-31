@@ -2,5 +2,6 @@
     "port": 8181,
     "uiPort": 3000,
     "uiClientAuthSecret": "sample_ui_secret",
-    "machineClientAuthSecret": "sample_nodeclient_secret"
+    "machineClientAuthSecret": "sample_nodeclient_secret",
+    "privateIpServer": "192.168.1.7"
 }
