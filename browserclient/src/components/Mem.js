@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import drawCircle from "../scripts/canvasLoadAnimation";
 
-const Mem = ({ info, macAddress, memWidgetId }) => {
+const Mem = ({ info, memWidgetId }) => {
     // console.log(info);
     let { freeMem, totalMem, usedMem, memUsage } = info;
     memUsage *= 100;

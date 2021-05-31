@@ -16,9 +16,10 @@ require("dotenv").config({
     path: `${__dirname}/.env`,
 });
 
-const { port } = require("../config.json");
+const { port, uiPort } = require("../config.json");
 // const port = 8181;
 const num_processes = require("os").cpus().length;
+const privateIp = require("./utils/getPrivateIp")();
 
 const io_redis = require("socket.io-redis");
 const farmhash = require("farmhash");
@@ -72,11 +73,27 @@ if (cluster.isMaster) {
 
     app.use(cors());
 
+    const corsOptions = {
+        // origin: "http://localhost:3000", // only allow the server computer
+        // TODO: allow all the computers in the network to access the server
+        // PROBLEM: both the node client and the browser client connect to the very same server and we
+        // may have different cors rules for different type of clients.
+        // PROBLEM: no origin for node client (because they are not browsers)
+        origin: function (origin, callback) {
+            console.log("origin : " + origin);
+            if (
+                origin === undefined ||
+                origin === `http://localhost:${uiPort}` ||
+                origin === `http://${privateIp}:${uiPort}`
+            ) {
+                return callback(null, true);
+            }
+        },
+        // origin: "*", // allow any ui client to connect
+    };
     const io = socketio(server, {
         // Refer fixes.md ⭐️ Socket.io cors error
-        cors: {
-            origin: "http://localhost:3000",
-        },
+        cors: corsOptions, // CORS configuration options for the socket.io server
     });
     io.adapter(io_redis({ host: "localhost", port: 6379 }));
     io.on("connection", function (socket) {

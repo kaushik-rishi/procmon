@@ -51,6 +51,7 @@ module.exports = (io, socket) => {
         } else if (secret === "sample_ui_secret") {
             socket.join("browsers");
             Machine.find((err, machines) => {
+                console.log(machines);
                 // getting all the pre-existing machines
                 machines.forEach((machine) => {
                     // on load all machines are offline

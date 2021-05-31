@@ -25,7 +25,6 @@ const Widget = ({ data }) => {
                 <Col>
                     <Cpu
                         info={cpuLoad}
-                        macAddress={macAddress}
                         cpuWidgetId={`canvas-cpu-${hashedMacAddress}`}
                     />
                 </Col>
@@ -37,7 +36,6 @@ const Widget = ({ data }) => {
                             usedMem,
                             memUsage,
                         }}
-                        macAddress={macAddress}
                         memWidgetId={`canvas-mem-${hashedMacAddress}`}
                     />
                 </Col>

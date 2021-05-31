@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import drawCircle from "../scripts/canvasLoadAnimation";
 
-const Cpu = ({ info: cpuLoad, macAddress, cpuWidgetId }) => {
+const Cpu = ({ info: cpuLoad, cpuWidgetId }) => {
     // console.log(cpuLoad);
 
     // const classname = `canvas-cpu-${macAddress}`;
