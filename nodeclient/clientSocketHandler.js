@@ -1,4 +1,6 @@
+require("colors");
 const io = require("socket.io-client");
+const ora = require("ora");
 const {
     port: portServer,
     machineClientAuthSecret,
@@ -23,6 +25,8 @@ socket.on("connect", () => {
     });
 
     // send the performance data for every 1 second
+    const spinner = ora(`Streaming data to the server ...`);
+    spinner.start();
     let performanceDataInterval = setInterval(() => {
         getPerformanceData().then((perfData) => {
             // [+] DEBUG_LOGS: incrementabl building of event listeners on disconnect and reconnect
@@ -38,6 +42,6 @@ socket.on("connect", () => {
         // Clear the interval if the socket is disconnected
         // [+] BUGFIX: prevents incremental build up of event listeners
         clearInterval(performanceDataInterval);
-        console.log("Node client lost connection with the server.");
+        spinner.fail("Disconnected from the server");
     });
 });

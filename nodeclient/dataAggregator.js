@@ -78,18 +78,21 @@ const getCpuLoad = () => {
 };
 
 const getExternalMACAddress = () => {
-    let macAddress;
+    let macAddress = null;
     const networkInterfaces = os.networkInterfaces();
 
     // [+] Remove this later [TESTING PURPOSES ONLY !!]
-    let randomMacAddress;
-    randomMacAddress = Math.random().toString(36).substring(7);
-    randomMacAddress = Number(Math.random() > 0.5).toString(); // either 1 or 0
-    randomMacAddress = Math.floor(Math.random() * 3) + 1; // 0, 1, 2
-    // randomMacAddress = 1;
+    if (process.env.RANDOM_MAC !== undefined) {
+        let randomMacAddress;
+        randomMacAddress = Math.random().toString(36).substring(7); // any random mac address
+        randomMacAddress = Number(Math.random() > 0.5).toString(); // either 1 or 0
+        randomMacAddress = Math.floor(Math.random() * 3) + 1; // 0, 1, 2
+        // randomMacAddress = 1;
 
-    console.log(`Random generated MAC: ${randomMacAddress}`);
-    // return randomMacAddress;
+        // prettier-ignore
+        // console.log(` Random generated MAC: ${randomMacAddress}`.black.bgYellow);
+        return randomMacAddress;
+    }
 
     for (let nI in networkInterfaces) {
         let nIdata = networkInterfaces[nI];
@@ -98,7 +101,7 @@ const getExternalMACAddress = () => {
             macAddress = nIdata[0].mac;
         }
     }
-    return macAddress;
+    return macAddress === null ? 1 : macAddress;
 };
 
 // performanceData().then(console.log);

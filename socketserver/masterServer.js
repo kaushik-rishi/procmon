@@ -73,23 +73,27 @@ if (cluster.isMaster) {
 
     app.use(cors());
 
+    app.get("/ping", (req, res) => {
+        res.send("pong");
+    });
+
     const corsOptions = {
         // origin: "http://localhost:3000", // only allow the server computer
         // TODO: allow all the computers in the network to access the server
         // PROBLEM: both the node client and the browser client connect to the very same server and we
         // may have different cors rules for different type of clients.
         // PROBLEM: no origin for node client (because they are not browsers)
-        origin: function (origin, callback) {
-            console.log("origin : " + origin);
-            if (
-                origin === undefined ||
-                origin === `http://localhost:${uiPort}` ||
-                origin === `http://${privateIp}:${uiPort}`
-            ) {
-                return callback(null, true);
-            }
-        },
-        // origin: "*", // allow any ui client to connect
+        // origin: function (origin, callback) {
+        //     console.log("origin : " + origin);
+        //     if (
+        //         origin === undefined ||
+        //         origin === `http://localhost:${uiPort}` ||
+        //         origin === `http://${privateIp}:${uiPort}`
+        //     ) {
+        //         return callback(null, true);
+        //     }
+        // },
+        origin: "*", // allow any ui client to connect [for dev purposes (ngrok 😷)]
     };
     const io = socketio(server, {
         // Refer fixes.md ⭐️ Socket.io cors error

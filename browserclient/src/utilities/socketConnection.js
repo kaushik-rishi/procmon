@@ -1,7 +1,7 @@
 import io from "socket.io-client";
-const port = 8181;
+import { serverUrl } from "../config";
 const uiClientAuthSecret = "sample_ui_secret";
-const socket = io(`http://192.168.1.7:8181`);
+const socket = io(serverUrl);
 
 socket.emit("authSecret", uiClientAuthSecret);
 
