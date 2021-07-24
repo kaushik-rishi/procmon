@@ -1,0 +1,16 @@
+{
+  "name": "procmon-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/kaushik-rishi/procmon.git",
+  "author": "kaushik-rishi <rishi.cp01@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "format": "prettier --write \"**/*.js\" \"**/*.js\"",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "prettier": "2.3.2",
+    "husky": "^7.0.0"
+  }
+}

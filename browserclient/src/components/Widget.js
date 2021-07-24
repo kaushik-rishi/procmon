@@ -18,8 +18,9 @@ const Widget = ({ data }) => {
     // console.log(Object.keys(farmhash));
     return (
         <Card
-            className='m-5 p-3 rounded position-relative'
-            style={{ position: "relative" }}>
+            className="m-5 p-3 rounded position-relative"
+            style={{ position: "relative" }}
+        >
             {!isActive && <OfflineNotch />}
             <Row>
                 <Col>

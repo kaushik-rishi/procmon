@@ -1,12 +1,26 @@
 require("colors");
 const io = require("socket.io-client");
 const ora = require("ora");
+const validator = require("validator");
+
 const {
     port: portServer,
     machineClientAuthSecret,
     privateIpServer,
 } = require("../config.json");
-const socket = io(`http://${privateIpServer}:${portServer}`);
+
+// TODO: change slice limit when the application is packaged to npm
+process.argv = process.argv.slice(2);
+
+// TODO: Change this to server id input from the command line
+const serverUrl = process.argv[0];
+if (!validator.isURL(serverUrl)) {
+    console.log("❌ Please enter a valid server url.");
+    process.exit(1);
+}
+
+// const socket = io(`http://${privateIpServer}:${portServer}`);
+const socket = io(serverUrl);
 const {
     getPerformanceData,
     getExternalMACAddress,
@@ -29,7 +43,7 @@ socket.on("connect", () => {
     spinner.start();
     let performanceDataInterval = setInterval(() => {
         getPerformanceData().then((perfData) => {
-            // [+] DEBUG_LOGS: incrementabl building of event listeners on disconnect and reconnect
+            // [+] DEBUG_LOGS: incremental building of event listeners on disconnect and reconnect
             // console.log("alive");
             // console.log(socket.disconnected);
             perfData.macAddress = macAddress;

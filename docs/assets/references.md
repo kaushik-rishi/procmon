@@ -1,3 +1,3 @@
-- https://stackoverflow.com/questions/36816181/get-view-memory-cpu-usage-via-nodejs
-- https://stackoverflow.com/questions/9565912/convert-the-output-of-os-cpus-in-node-js-to-percentage
-- https://stackoverflow.com/questions/20018588/how-to-monitor-the-memory-usage-of-node-js/30087518
+-   https://stackoverflow.com/questions/36816181/get-view-memory-cpu-usage-via-nodejs
+-   https://stackoverflow.com/questions/9565912/convert-the-output-of-os-cpus-in-node-js-to-percentage
+-   https://stackoverflow.com/questions/20018588/how-to-monitor-the-memory-usage-of-node-js/30087518

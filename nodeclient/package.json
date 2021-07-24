@@ -1,25 +1,26 @@
 {
-  "name": "node_client",
-  "version": "1.0.0",
-  "main": "clientSocketHanlder.js",
-  "license": "MIT",
-  "scripts": {
-    "start": "node clientSocketHandler.js",
-    "start:dev": "nodemon clientSocketHandler.js",
-    "randomMac": "RANDOM_MAC=true node clientSocketHandler.js",
-    "randomMac:dev": "RANDOM_MAC=true nodemon clientSocketHandler.js"
-  },
-  "author": {
-    "email": "rishi.cp01@gmail.com",
-    "name": "Kaushik Rishi Manchukonda"
-  },
-  "dependencies": {
-    "colors": "^1.4.0",
-    "farmhash": "^3.2.1",
-    "ora": "^5.4.0",
-    "socket.io-client": "^4.1.2"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.7"
-  }
+    "name": "osclient",
+    "version": "1.0.0",
+    "main": "clientSocketHanlder.js",
+    "license": "MIT",
+    "scripts": {
+        "start": "node clientSocketHandler.js",
+        "start:dev": "nodemon clientSocketHandler.js",
+        "randomMac": "RANDOM_MAC=true node clientSocketHandler.js",
+        "randomMac:dev": "RANDOM_MAC=true nodemon clientSocketHandler.js"
+    },
+    "author": {
+        "email": "rishi.cp01@gmail.com",
+        "name": "Kaushik Rishi Manchukonda"
+    },
+    "dependencies": {
+        "colors": "^1.4.0",
+        "farmhash": "^3.2.1",
+        "ora": "^5.4.0",
+        "socket.io-client": "^4.1.2",
+        "validator": "^13.6.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.7"
+    }
 }

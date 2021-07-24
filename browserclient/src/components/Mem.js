@@ -18,27 +18,29 @@ const Mem = ({ info, memWidgetId }) => {
     drawCircle(canvas, memUsage);
 
     return (
-        <div className='d-flex flex-column justify-content-center align-items-center m-4 p-2'>
+        <div className="d-flex flex-column justify-content-center align-items-center m-4 p-2">
             <h3>Memory Usage</h3>
             <div
                 style={{
                     width: "200px",
                     height: "200px",
                     position: "relative",
-                }}>
-                <canvas width='200px' height='200px' id={memWidgetId}></canvas>
+                }}
+            >
+                <canvas width="200px" height="200px" id={memWidgetId}></canvas>
                 <div
                     style={{
                         position: "absolute",
                         top: "50%",
                         left: "50%",
                         transform: "translateX(-50%) translateY(-50%)",
-                    }}>
+                    }}
+                >
                     {memUsage}%
                 </div>
             </div>
 
-            <div className='mt-4'>
+            <div className="mt-4">
                 <div>
                     Total Memory: {Math.floor((totalMem / factor) * 100) / 100}
                     gb
