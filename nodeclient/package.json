@@ -9,6 +9,9 @@
         "randomMac": "RANDOM_MAC=true node clientSocketHandler.js",
         "randomMac:dev": "RANDOM_MAC=true nodemon clientSocketHandler.js"
     },
+    "bin": {
+        "procmon": "./clientSocketHandler.js"
+    },
     "author": {
         "email": "rishi.cp01@gmail.com",
         "name": "Kaushik Rishi Manchukonda"

@@ -1,3 +1,5 @@
+#!/usr/bin/node
+
 require("colors");
 const io = require("socket.io-client");
 const ora = require("ora");
